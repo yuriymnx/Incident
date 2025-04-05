@@ -7,12 +7,14 @@ using Incident.Common.Services.Interfaces;
 using Incident.Composition;
 using Incident.Core.Configuration;
 using Incident.Views;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Incident.Common;
+using Microsoft.Extensions.Configuration;
+using NLog.LayoutRenderers.Wrappers;
 
 namespace Incident;
 
@@ -99,11 +101,21 @@ public partial class App : Application
     private void SetupServices(HostBuilderContext context, IServiceCollection services)
     {
         services.Configure<AppSettings>(context.Configuration);
-        services.Configure<UserSettings>(context.Configuration)
+        services.Configure<UserSettings>(context.Configuration);
+        if (context.Properties.TryGetValue(typeof(AppConfigurationSource<UserSettings>), out var value) &&
+            value is AppConfigurationProvider<UserSettings> userConfigSource)
+        {
+            services.AddSingleton(userConfigSource);
+        }
+        services.AddSingleton<MainWindow>();
     }
 
-    private void SetupConfiguration(HostBuilderContext context, IServiceCollection services)
+    private void SetupConfiguration(HostBuilderContext context, IConfigurationBuilder builder)
     {
-        throw new NotImplementedException();
+        Directory.CreateDirectory(AppConfigurationProvider.ConfigDirectory);
+        builder.Add(new AppConfigurationSource<AppSettings>(Constants.AppConfigFileName));
+        var ucs = new AppConfigurationSource<UserSettings>(Constants.UserConfigFileName);
+        builder.Add(ucs);
+        context.Properties.Add(typeof(AppConfigurationProvider<UserSettings>), ucs);
     }
 }
