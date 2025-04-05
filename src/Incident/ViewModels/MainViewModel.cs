@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Incident.ViewModels.Base;
+using Microsoft.Extensions.Logging;
 
 namespace Incident.ViewModels;
 
-internal partial class MainViewModel : ViewModelBase
+internal class MainViewModel : ViewModelBase
 {
     public string Greeting => "Welcome to Avalonia!";
 

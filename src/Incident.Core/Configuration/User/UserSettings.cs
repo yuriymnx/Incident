@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-namespace Incident.Core.Configuration;
+namespace Incident.Core.Configuration.User;
 
 public class UserSettings
 {

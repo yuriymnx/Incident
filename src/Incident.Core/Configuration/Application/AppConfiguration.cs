@@ -1,7 +1,8 @@
 ﻿using Incident.Common;
+using Incident.Core.Configuration.Interfaces;
 using Microsoft.Extensions.Options;
 
-namespace Incident.Core.Configuration;
+namespace Incident.Core.Configuration.Application;
 
 public class AppConfiguration : IAppConfiguration
 {

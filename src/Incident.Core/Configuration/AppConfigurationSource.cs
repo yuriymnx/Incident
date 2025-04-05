@@ -27,7 +27,7 @@ public class AppConfigurationSource<T> : JsonConfigurationSource where T : class
     public async Task Save(T settings)
     {
         if (_provider == null)
-            throw new InvalidOperationException("AppConfigurationProvider is not initialized");
+            throw new InvalidOperationException("AppConfigurationProvider не инициализирован");
         await _provider.Save(settings);
     }
 

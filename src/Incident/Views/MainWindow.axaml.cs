@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Incident.Utils;
+using Incident.ViewModels.Base;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;

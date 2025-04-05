@@ -8,7 +8,7 @@ public static class AssemblyResource
     {
         var assembly = Assembly.GetCallingAssembly();
         var resourceName = assembly.GetManifestResourceNames().Single(x => x.EndsWith(resourceFileName));
-        return assembly.GetManifestResourceStream(resourceName) ?? throw new InvalidOperationException($"Resource ith name {resourceName} not found");
+        return assembly.GetManifestResourceStream(resourceName) ?? throw new InvalidOperationException($"Ресурс с именем {resourceName} не найден");
     }
 
     public static string GetResourceText(string resourceFileName)

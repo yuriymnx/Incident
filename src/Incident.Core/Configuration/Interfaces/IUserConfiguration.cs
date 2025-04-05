@@ -1,4 +1,4 @@
-﻿namespace Incident.Core.Configuration;
+﻿namespace Incident.Core.Configuration.Interfaces;
 
 public interface IUserConfiguration
 {

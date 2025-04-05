@@ -1,6 +1,6 @@
 ﻿using Incident.Common;
 
-namespace Incident.Core.Configuration;
+namespace Incident.Core.Configuration.Application;
 
 public class AppSettings
 {

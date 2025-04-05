@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Input;
 
-namespace Incident.ViewModels;
+namespace Incident.ViewModels.Base;
 
 internal abstract class ViewModelBase : ObservableObject
 {

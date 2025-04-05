@@ -1,12 +1,11 @@
-﻿using Incident.ViewModels;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Incident;
+namespace Incident.ViewModels.Base;
 
 internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainViewModel
 {
@@ -39,7 +38,7 @@ internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainVi
     public void ShowDialogMessage(IRootContent message)
     {
         _topMessages.Add(message);
-        Logger.LogDebug("Added dialog message: {0}, top messages count: {1}", message, _topMessages.Count);
+        Logger.LogDebug("Добавлено диалоговое окно: {0}, диалоговых окон: {1}", message, _topMessages.Count);
         OnPropertyChanged(nameof(HasTopMessages));
     }
 
@@ -71,13 +70,13 @@ internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainVi
             d.Dispose();
         }
         OnPropertyChanged(nameof(HasTopMessages));
-        Logger.LogDebug("Top messages count: {0}", _topMessages.Count);
+        Logger.LogDebug("Диалоговых окон: {0}", _topMessages.Count);
     }
 
     public void ShowRootMessage(IRootContent message)
     {
         _rootMessages.Add(message);
-        Logger.LogDebug("Added dialog message: {0}, top messages count: {1}", message, _rootMessages.Count);
+        Logger.LogDebug("Добавлено корневое окно: {0}, корневых окон: {1}", message, _rootMessages.Count);
     }
 
     public void ReplaceRootMessage(IRootContent message)
@@ -103,7 +102,7 @@ internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainVi
     public void RemoveRootMessage()
     {
         var last = _rootMessages.LastOrDefault();
-        if (last == null || _rootMessages.Count == 0 || (_rootMessages.Count == 1 && last is MainViewModelBase))
+        if (last == null || _rootMessages.Count == 0 || _rootMessages.Count == 1 && last is MainViewModelBase)
         {
             return;
         }
@@ -113,6 +112,6 @@ internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainVi
             d.Dispose();
         }
         OnPropertyChanged(nameof(HasTopMessages));
-        Logger.LogDebug("Root messages count: {0}", _rootMessages.Count);
+        Logger.LogDebug("Корневых окон: {0}", _rootMessages.Count);
     }
 }

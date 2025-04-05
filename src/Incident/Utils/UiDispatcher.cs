@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Avalonia.Threading;
+﻿using Avalonia.Threading;
+using System.Threading.Tasks;
 
 namespace Incident.Utils;
 

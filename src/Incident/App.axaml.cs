@@ -3,18 +3,21 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Incident.Common;
 using Incident.Common.Services.Interfaces;
 using Incident.Composition;
 using Incident.Core.Configuration;
+using Incident.Core.Configuration.Application;
+using Incident.Core.Configuration.Interfaces;
+using Incident.Core.Configuration.User;
+using Incident.ViewModels.Base;
 using Incident.Views;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Incident.Common;
-using Microsoft.Extensions.Configuration;
-using NLog.LayoutRenderers.Wrappers;
 
 namespace Incident;
 

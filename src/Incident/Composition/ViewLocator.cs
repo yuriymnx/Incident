@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using Incident.ViewModels.Base;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avalonia.Controls;
-using Incident.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Incident.Composition;
 
@@ -33,3 +33,6 @@ internal class ViewLocator : IViewLocator
 
     public bool Match<T>() where T : notnull => _dic.ContainsKey(typeof(T));
 }
+
+
+internal record ViewLocationDescriptor(Type ViewModel, Func<Control> Factory);

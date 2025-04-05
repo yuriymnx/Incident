@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using Incident.Common.Services.Interfaces;
+﻿using Incident.Common.Services.Interfaces;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace Incident.Common.Services;
 

@@ -1,4 +1,5 @@
-﻿using Incident.Core.Utils;
+﻿using Incident.Core.Configuration.Interfaces;
+using Incident.Core.Utils;
 using Microsoft.Extensions.Configuration.Json;
 using Newtonsoft.Json;
 using NLog;
