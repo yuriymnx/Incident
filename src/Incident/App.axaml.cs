@@ -15,19 +15,23 @@ using Incident.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
+using Incident.Common.Composition;
+using Incident.Core.Services;
 
 namespace Incident;
 
-public partial class App : Application
+public class App : Application
 {
     private IHost? _host;
 
     private bool _startupFailed;
 
-    private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+    private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
     public override void Initialize()
     {
@@ -71,19 +75,19 @@ public partial class App : Application
             .ConfigureAppConfiguration(SetupConfiguration)
             .ConfigureServices(SetupServices)
             .Build();
-        NLog.LogManager.Configuration.Variables["userLevel"] = _host.Services.GetRequiredService<IAppConfiguration>().LogLevel;
+        LogManager.Configuration.Variables["userLevel"] = _host.Services.GetRequiredService<IAppConfiguration>().LogLevel;
         Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             BindingPlugins.DataValidators.RemoveAt(0);
             _host.Services.GetRequiredService<IEnvironmentInfo>().Dump();
             desktop.MainWindow = _host.Services.GetRequiredService<MainWindow>();
-            var mvm = _host.Services.GetRequiredService<IMainViewModel>(); 
+            var mainViewModel = _host.Services.GetRequiredService<IMainViewModel>(); 
             var logger = NLog.LogManager.GetCurrentClassLogger();
             desktop.Exit += async (s, e) =>
             {
                 logger.Trace("Exeting application");
-                if (mvm is IDisposable d)
+                if (mainViewModel is IDisposable d)
                 {
                     d.Dispose();
                     logger.Trace("IMainViewModel dispose");
@@ -111,6 +115,7 @@ public partial class App : Application
             services.AddSingleton(userConfigSource);
         }
         services.AddSingleton<MainWindow>();
+        services.Register(new CoreModule());
     }
 
     private void SetupConfiguration(HostBuilderContext context, IConfigurationBuilder builder)

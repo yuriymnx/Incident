@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Incident;
+namespace Incident.ViewModels.Base;
 
 internal interface IRootContent
 {
