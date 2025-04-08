@@ -1,13 +1,23 @@
-﻿using Incident.ViewModels.Base;
+﻿using System;
+using System.Threading.Tasks;
+using Incident.ViewModels.Base;
 using Microsoft.Extensions.Logging;
 
 namespace Incident.ViewModels;
 
-internal class MainViewModel : ViewModelBase
+internal class WelcomeViewModel : MainViewModelBase , IDisposable
 {
-    public string Greeting => "Welcome to Avalonia!";
-
-    public MainViewModel(ILogger logger) : base(logger)
+    public WelcomeViewModel( ILogger<WelcomeViewModel> logger) : base(logger)
     {
+    }
+
+    public override Task Startup(string[]? args)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
     }
 }

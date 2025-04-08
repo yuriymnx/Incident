@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Incident.Services;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,12 +21,15 @@ internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainVi
 
     public bool IsModal => false;
 
+    protected IDialogServiceInner DialogService { get; }
+
     public abstract Task Startup(string[]? args);
 
     public IReadOnlyList<IRootContent> RootMessages => _rootMessages;
     public IReadOnlyList<IRootContent> TopMessages => _topMessages;
 
     public bool HasTopMessages => _topMessages.Count > 0;
+
     public IRootContent? TopDialogMessage => _topMessages.Count == 0 ? null : _topMessages[^1];
     
     private bool _allDialogsVisible;
