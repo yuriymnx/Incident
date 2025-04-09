@@ -4,7 +4,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Incident.Common;
-using Incident.Common.Composition;
 using Incident.Common.Services.Interfaces;
 using Incident.Composition;
 using Incident.Core.Configuration;
@@ -19,8 +18,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Incident.Services;
+using Incident.Utils;
 
 namespace Incident;
 
@@ -81,7 +83,7 @@ public class App : Application
             BindingPlugins.DataValidators.RemoveAt(0);
             _host.Services.GetRequiredService<IEnvironmentInfo>().Dump();
             desktop.MainWindow = _host.Services.GetRequiredService<MainWindow>();
-            var mainViewModel = _host.Services.GetRequiredService<IMainViewModel>(); 
+            var mainViewModel = _host.Services.GetRequiredService<IMainViewModel>();
             var logger = NLog.LogManager.GetCurrentClassLogger();
             desktop.Exit += async (s, e) =>
             {
@@ -114,7 +116,8 @@ public class App : Application
             services.AddSingleton(userConfigSource);
         }
         services.AddSingleton<MainWindow>();
-        services.Register(new CoreModule());
+       
+        services.LoadAllModules();
     }
 
     private void SetupConfiguration(HostBuilderContext context, IConfigurationBuilder builder)

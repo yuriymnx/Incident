@@ -5,11 +5,11 @@
              xmlns:vm="clr-namespace:Incident.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Incident.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:WelcomeViewModel">
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
+	  <vm:WelcomeViewModel />
   </Design.DataContext>
 
   <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>

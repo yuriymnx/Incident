@@ -21,7 +21,7 @@ internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainVi
 
     public bool IsModal => false;
 
-    protected IDialogServiceInner DialogService { get; }
+    protected IDialogService DialogService { get; }
 
     public abstract Task Startup(string[]? args);
 

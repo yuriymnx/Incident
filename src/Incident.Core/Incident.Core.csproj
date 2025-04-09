@@ -18,4 +18,13 @@
     <ProjectReference Include="..\Incident.Common\Incident.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Configuration\Application\appconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configuration\User\userconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
