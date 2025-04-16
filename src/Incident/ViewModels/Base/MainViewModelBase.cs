@@ -14,9 +14,10 @@ internal abstract class MainViewModelBase : ViewModelBase, IRootContent, IMainVi
 
     private readonly ObservableCollection<IRootContent> _topMessages = new();
 
-    protected MainViewModelBase(ILogger<MainViewModelBase> logger)
+    protected MainViewModelBase(ILogger<MainViewModelBase> logger, IDialogService dialogService)
         : base(logger)
     {
+        DialogService = dialogService;
     }
 
     public bool IsModal => false;

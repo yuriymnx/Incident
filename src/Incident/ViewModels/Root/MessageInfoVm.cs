@@ -13,7 +13,7 @@ internal class MessageInfoVm : RootMessageBase, IRootMessage
     private Action? _action;
     public string? Header { get; protected set; }
     public string? Message { get; protected set; }
-    public bool IsModal { get; protected set; }
+    public new bool IsModal { get; protected set; }
     public MessageInfoVm(MessageInfo messageInfo)
     {
         Header = messageInfo.Header;
