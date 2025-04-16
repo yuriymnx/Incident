@@ -10,7 +10,7 @@ using Incident.Core.Configuration;
 using Incident.Core.Configuration.Application;
 using Incident.Core.Configuration.Interfaces;
 using Incident.Core.Configuration.User;
-using Incident.Core.Services;
+using Incident.Utils;
 using Incident.ViewModels.Base;
 using Incident.Views;
 using Microsoft.Extensions.Configuration;
@@ -18,11 +18,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Incident.Services;
-using Incident.Utils;
 
 namespace Incident;
 
@@ -50,6 +47,10 @@ public class App : Application
         {
             _logger.Fatal(ex);
             _startupFailed = true;
+            if (_host == null)
+            {
+                Environment.Exit(-1);
+            }
         }
     }
 
@@ -84,7 +85,7 @@ public class App : Application
             _host.Services.GetRequiredService<IEnvironmentInfo>().Dump();
             desktop.MainWindow = _host.Services.GetRequiredService<MainWindow>();
             var mainViewModel = _host.Services.GetRequiredService<IMainViewModel>();
-            var logger = NLog.LogManager.GetCurrentClassLogger();
+            var logger = LogManager.GetCurrentClassLogger();
             desktop.Exit += async (s, e) =>
             {
                 logger.Trace("Exeting application");

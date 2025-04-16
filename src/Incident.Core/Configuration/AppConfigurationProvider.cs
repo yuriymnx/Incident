@@ -71,6 +71,7 @@ public sealed class AppConfigurationProvider<T> : AppConfigurationProvider where
         {
             Logger.Error(ex, $"Ошибка при загрузке класса {nameof(T)} из файла");
         }
+        
         base.Load();
     }
 

@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Incident.Common.Services;
 
-internal class EnvironmentInfo : IEnvironmentInfo
+public class EnvironmentInfo : IEnvironmentInfo
 {
     private readonly ILogger<EnvironmentInfo> _logger;
     public EnvironmentInfo(ILogger<EnvironmentInfo> logger)

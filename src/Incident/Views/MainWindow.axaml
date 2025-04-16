@@ -6,7 +6,6 @@
         xmlns:views="clr-namespace:Incident.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Incident.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
         Title="Incident">
         <views:MainView />
 </Window>
