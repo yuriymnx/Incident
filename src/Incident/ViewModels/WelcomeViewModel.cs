@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Incident.Core.Configuration.Interfaces;
 using Incident.Core.Services;
 using Incident.Services;
 using Incident.ViewModels.Base;
@@ -15,7 +16,9 @@ internal class WelcomeViewModel : MainViewModelBase , IDisposable
     public WelcomeViewModel(
         ILogger<WelcomeViewModel> logger,
         IUserService userService,
-        IDialogService dialogService) : base(logger, dialogService)
+        MainMenuViewModel mainMenuViewModel,
+        IAppConfiguration configuration,
+        IDialogService dialogService) : base(logger, mainMenuViewModel, configuration)
     {
         _logger = logger;
         _userService = userService;
